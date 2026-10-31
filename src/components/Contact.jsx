@@ -1,165 +1,267 @@
 import { useState } from 'react';
 import { useLang } from '../context/LanguageContext';
 import { content } from '../data/content';
-import { Mail, Send, AlertCircle, CheckCircle, Phone, Code2 } from 'lucide-react';
+import {
+  Sparkles,
+  Mail,
+  Phone,
+  Send,
+  CheckCircle2,
+  AlertCircle,
+  ExternalLink,
+  MessageSquare
+} from 'lucide-react';
+import { FacebookIcon, LinkedinIcon, WhatsappIcon } from './BrandIcons';
 import './Contact.css';
 
 export default function Contact() {
   const { lang } = useLang();
   const t = content[lang].contact;
 
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
-  const [status, setStatus] = useState(null); // 'success' | 'error' | null
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: '',
+  });
+  const [status, setStatus] = useState(null); // null | 'success' | 'error'
+  const [linkedinImgError, setLinkedinImgError] = useState(false);
+  const [whatsappImgError, setWhatsappImgError] = useState(false);
 
   const handleChange = (e) => {
-    setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
     if (status) setStatus(null);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+    if (!formData.name.trim() || !formData.email.trim() || !formData.message.trim()) {
       setStatus('error');
       return;
     }
-    // ⚠️ Frontend-only demo — no real backend/email service connected
+    // Demo submission handling
     setStatus('success');
-    setForm({ name: '', email: '', message: '' });
+    setFormData({ name: '', email: '', message: '' });
   };
 
   return (
-    <section id="contact" className="contact" aria-labelledby="contact-title">
+    <section id="contact" className="contact" aria-label={t.title}>
+      {/* Ambient background glow */}
+      <div className="contact__glow" aria-hidden="true" />
+
       <div className="container">
+        {/* Section Header */}
         <div className="section-header">
-          <span className="section-label">{t.label}</span>
-          <h2 className="section-title" id="contact-title">{t.title}</h2>
+          <span className="section-label">
+            <Sparkles size={14} />
+            <span>{t.label}</span>
+          </span>
+          <h2 className="section-title gradient-text">{t.title}</h2>
           <p className="section-desc">{t.desc}</p>
         </div>
 
         <div className="contact__grid">
-          {/* Info side */}
+          {/* Contact Information & Channels */}
           <div className="contact__info">
-
-            {/* Direct contact cards */}
-            <div className="contact__direct">
+            {/* Direct Channel Cards */}
+            <div className="contact__channels">
+              {/* Email Card */}
               <a
                 href={`mailto:${t.email}`}
-                className="contact__direct-card"
-                aria-label={t.email_btn}
+                className="card contact__channel-card"
+                aria-label="Send Email"
               >
-                <div className="contact__direct-icon">
-                  <Mail size={20} aria-hidden="true" />
+                <div className="contact__channel-icon contact__channel-icon--email">
+                  <Mail size={22} />
                 </div>
-                <div className="contact__direct-text">
-                  <span className="contact__direct-label">{t.email_btn}</span>
-                  <span className="contact__direct-value">{t.email}</span>
+                <div className="contact__channel-body">
+                  <span className="contact__channel-label">Email</span>
+                  <strong className="contact__channel-val">{t.email}</strong>
                 </div>
+                <ExternalLink size={16} className="contact__channel-ext" />
               </a>
 
+              {/* Phone / WhatsApp Card */}
               <a
                 href={`tel:${t.phone}`}
-                className="contact__direct-card"
-                aria-label={t.phone_label}
+                className="card contact__channel-card"
+                aria-label="Call Phone"
               >
-                <div className="contact__direct-icon">
-                  <Phone size={20} aria-hidden="true" />
+                <div className="contact__channel-icon contact__channel-icon--phone">
+                  <Phone size={22} />
                 </div>
-                <div className="contact__direct-text">
-                  <span className="contact__direct-label">{t.phone_label}</span>
-                  <span className="contact__direct-value" dir="ltr">{t.phone}</span>
+                <div className="contact__channel-body">
+                  <span className="contact__channel-label">{t.phone_label}</span>
+                  <strong className="contact__channel-val">{t.phone}</strong>
                 </div>
+                <ExternalLink size={16} className="contact__channel-ext" />
               </a>
             </div>
 
-            <div className="contact__socials">
-              <p className="contact__socials-title">{t.social_title}</p>
-              <div className="contact__social-links">
-              </div>
-            </div>
+            {/* Social Channels — Facebook, LinkedIn (Custom Image Slot), WhatsApp (Custom Image Slot) */}
+            <div className="card contact__socials-card">
+              <h4 className="contact__socials-title">
+                <MessageSquare size={16} />
+                <span>{t.social_title || 'حساباتي على المنصات'}</span>
+              </h4>
 
-            {/* Demo notice */}
-            <div className="contact__note" role="note">
-              <AlertCircle size={15} aria-hidden="true" />
-              <p>{t.form_note}</p>
+              <div className="contact__social-list">
+                {/* Facebook with Lucide Icon */}
+                <a
+                  href={t.facebook || 'https://facebook.com'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="contact__social-item"
+                >
+                  <div className="contact__social-icon-box contact__social-icon-box--fb">
+                    <FacebookIcon size={20} />
+                  </div>
+                  <div className="contact__social-text">
+                    <strong>Facebook</strong>
+                    <span>{lang === 'ar' ? 'تواصل عبر فيسبوك' : 'Connect on Facebook'}</span>
+                  </div>
+                  <ExternalLink size={15} className="contact__social-arrow" />
+                </a>
+
+                {/* LinkedIn — Dedicated Image Slot */}
+                <a
+                  href={t.linkedin || 'https://linkedin.com'}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="contact__social-item"
+                >
+                  <div className="contact__social-img-slot contact__social-img-slot--linkedin">
+                    {!linkedinImgError ? (
+                      <img
+                        src="/icons/linkedin.png"
+                        alt="LinkedIn"
+                        className="contact__custom-img"
+                        onError={() => setLinkedinImgError(true)}
+                      />
+                    ) : (
+                      <span className="contact__custom-fallback">in</span>
+                    )}
+                  </div>
+                  <div className="contact__social-text">
+                    <strong>LinkedIn</strong>
+                    <span>{lang === 'ar' ? 'الملف المهني لينكد إن' : 'Professional Profile'}</span>
+                  </div>
+                  <ExternalLink size={15} className="contact__social-arrow" />
+                </a>
+
+                {/* WhatsApp — Dedicated Image Slot */}
+                <a
+                  href={t.whatsapp || `https://wa.me/20115830208`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="contact__social-item"
+                >
+                  <div className="contact__social-img-slot contact__social-img-slot--whatsapp">
+                    {!whatsappImgError ? (
+                      <img
+                        src="/icons/whatsapp.png"
+                        alt="WhatsApp"
+                        className="contact__custom-img"
+                        onError={() => setWhatsappImgError(true)}
+                      />
+                    ) : (
+                      <span className="contact__custom-fallback">WA</span>
+                    )}
+                  </div>
+                  <div className="contact__social-text">
+                    <strong>WhatsApp</strong>
+                    <span>{lang === 'ar' ? 'محادثة فورية مباشرة' : 'Instant Chat / Message'}</span>
+                  </div>
+                  <ExternalLink size={15} className="contact__social-arrow" />
+                </a>
+              </div>
             </div>
           </div>
 
-
-          {/* Form side */}
+          {/* Elegant Interactive Message Form */}
           <div className="card contact__form-card">
-            <form
-              onSubmit={handleSubmit}
-              noValidate
-              aria-label={lang === 'ar' ? 'نموذج التواصل' : 'Contact form'}
-            >
+            <h3 className="contact__form-title">
+              {lang === 'ar' ? 'أرسل رسالة مباشرة' : 'Send a Direct Message'}
+            </h3>
+            <p className="contact__form-sub">
+              {lang === 'ar'
+                ? 'لديك فكرة مشروع أو استفسار؟ املأ النموذج وسأرد عليك في أقرب وقت.'
+                : 'Have a project idea or inquiry? Fill out the form below and I will get back to you.'}
+            </p>
+
+            <form onSubmit={handleSubmit} noValidate>
               <div className="form-group">
                 <label htmlFor="contact-name" className="form-label">
-                  {t.form_name} <span className="required-star" aria-hidden="true">*</span>
+                  {t.form_name}
                 </label>
                 <input
-                  id="contact-name"
                   type="text"
+                  id="contact-name"
                   name="name"
-                  className="form-input"
-                  value={form.name}
+                  value={formData.name}
                   onChange={handleChange}
-                  placeholder={lang === 'ar' ? 'وداعه الطاهر' : 'Widaa Mohammed'}
+                  placeholder={lang === 'ar' ? 'مثال: محمد أحمد' : 'e.g. John Doe'}
+                  className="form-input"
                   required
-                  aria-required="true"
                 />
               </div>
 
               <div className="form-group">
                 <label htmlFor="contact-email" className="form-label">
-                  {t.form_email} <span className="required-star" aria-hidden="true">*</span>
+                  {t.form_email}
                 </label>
                 <input
-                  id="contact-email"
                   type="email"
+                  id="contact-email"
                   name="email"
-                  className="form-input"
-                  value={form.email}
+                  value={formData.email}
                   onChange={handleChange}
-                  placeholder="widaa@example.com"
+                  placeholder="name@example.com"
+                  className="form-input"
                   required
-                  aria-required="true"
                 />
               </div>
 
               <div className="form-group">
                 <label htmlFor="contact-message" className="form-label">
-                  {t.form_message} <span className="required-star" aria-hidden="true">*</span>
+                  {t.form_message}
                 </label>
                 <textarea
                   id="contact-message"
                   name="message"
-                  className="form-input form-textarea"
-                  value={form.message}
+                  value={formData.message}
                   onChange={handleChange}
-                  placeholder={lang === 'ar' ? 'اكتب رسالتك هنا...' : 'Write your message here...'}
                   rows={5}
+                  placeholder={
+                    lang === 'ar'
+                      ? 'اكتب تفاصيل مشروعك أو رسالتك هنا...'
+                      : 'Describe your project or inquiry here...'
+                  }
+                  className="form-input form-textarea"
                   required
-                  aria-required="true"
                 />
               </div>
 
+              {/* Status Notifications */}
               {status === 'error' && (
-                <div className="form-feedback form-feedback--error" role="alert">
-                  <AlertCircle size={16} aria-hidden="true" />
+                <div className="form-alert form-alert--error" role="alert">
+                  <AlertCircle size={18} />
                   <span>{t.form_error}</span>
                 </div>
               )}
 
               {status === 'success' && (
-                <div className="form-feedback form-feedback--success" role="status">
-                  <CheckCircle size={16} aria-hidden="true" />
+                <div className="form-alert form-alert--success" role="alert">
+                  <CheckCircle2 size={18} />
                   <span>{t.form_success}</span>
                 </div>
               )}
 
               <button type="submit" className="btn btn-primary form-submit-btn">
-                <Send size={16} aria-hidden="true" />
-                {t.form_submit}
+                <span>{t.form_submit}</span>
+                <Send size={18} />
               </button>
             </form>
           </div>

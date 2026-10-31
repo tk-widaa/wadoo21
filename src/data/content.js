@@ -26,7 +26,7 @@ export const content = {
     about: {
       label: 'نبذة عني',
       title: 'من أنا؟',
-      desc: 'مطوّرة برمجيات شغوف بالتقنية والتصميم، أؤمن أن البرمجيات الجيدة تجمع بين الجمال والوظيفة.',
+      desc: 'مطوّرة برمجيات شغوف بالتقنية والتصميم، أؤمن أن البرمجيات الجيدة تجمع بين التصميم الممتاز والوظيفة.',
       bio1: 'أنا وداعه، درست هندسة البرمجيات في جامعة النصر وأتخصص في البرمجة وتطوير المواقع. أهتم بكل تفاصيل تجربة المستخدم وجماليات الواجهة.',
       bio2: 'أعمل بشغف على بناء تطبيقات ويب حديثة وسريعة، وأسعى دائماً لمواكبة أحدث التقنيات وتقديم أفضل جودة ممكنة في كل مشروع.',
       education_label: 'التعليم',
@@ -86,7 +86,7 @@ export const content = {
           tags: ['React', 'Node.js', 'MongoDB'],
           github: 'https://github.com/tk-widaa',
           live: '#',
-          color: '#7c3aed',
+          color: '#d4af37',
           image: null,
         },
         {
@@ -95,7 +95,7 @@ export const content = {
           tags: ['Next.js', 'Stripe', 'PostgreSQL'],
           github: 'https://altaher-moll.vercel.app/ar',
           live: '#',
-          color: '#8b5cf6',
+          color: '#e5a93c',
           image: null,
         },
         {
@@ -104,7 +104,7 @@ export const content = {
           tags: ['React', 'Chart.js', 'REST API'],
           github: 'http://hamza-alzain.vercel.app/contact',
           live: '#',
-          color: '#a78bfa',
+          color: '#f5d77f',
           image: null,
         },
         {
@@ -113,7 +113,7 @@ export const content = {
           tags: ['React', 'Vite', 'CSS'],
           github: 'https://github.com/tk-widaa',
           live: '#',
-          color: '#6d28d9',
+          color: '#b8860b',
           image: null,
         },
       ],
@@ -194,9 +194,11 @@ export const content = {
       form_error: 'يرجى ملء جميع الحقول المطلوبة.',
       form_note: 'ملاحظة: هذا النموذج للعرض فقط ولا يرسل رسائل حقيقية. للتواصل الفعلي استخدم البريد الإلكتروني أدناه.',
       social_title: 'تواصل عبر المنصات',
-      // ✏️ Update with your real info:
       email: 'widaaaltaher121@gmail.com',
       phone: '0115830208',
+      whatsapp: 'https://wa.me/+249115830208',
+      facebook: 'https://www.facebook.com/widaa.altaher',
+      linkedin: 'https://www.linkedin.com/in/widaa-altaher-widaa-193764422?utm_source=share_via&utm_content=profile&utm_medium=member_android',
     },
     footer: {
       copy: '© 2024 وداعه — جميع الحقوق محفوظة',
@@ -286,7 +288,7 @@ export const content = {
           tags: ['React', 'Node.js', 'MongoDB'],
           github: 'https://github.com/widaa',
           live: '#',
-          color: '#7c3aed',
+          color: '#d4af37',
           image: null,
         },
         {
@@ -295,7 +297,7 @@ export const content = {
           tags: ['Next.js', 'Stripe', 'PostgreSQL'],
           github: 'https://github.com/widaa',
           live: '#',
-          color: '#8b5cf6',
+          color: '#e5a93c',
           image: null,
         },
         {
@@ -304,7 +306,7 @@ export const content = {
           tags: ['React', 'Chart.js', 'REST API'],
           github: 'https://github.com/widaa',
           live: '#',
-          color: '#a78bfa',
+          color: '#f5d77f',
           image: null,
         },
         {
@@ -313,7 +315,7 @@ export const content = {
           tags: ['React', 'Vite', 'CSS'],
           github: 'https://github.com/widaa',
           live: '#',
-          color: '#6d28d9',
+          color: '#b8860b',
           image: null,
         },
       ],
@@ -394,9 +396,11 @@ export const content = {
       form_error: 'Please fill in all required fields.',
       form_note: 'Note: This form is a frontend demo and does not send real messages. For actual contact, use the email button above.',
       social_title: 'Connect Online',
-      // ✏️ Update with your real info:
       email: 'widaaaltaher121@gmail.com',
       phone: '0115830208',
+      whatsapp: 'https://wa.me/20115830208',
+      facebook: 'https://www.facebook.com/widaa.altaher',
+      linkedin: 'https://www.linkedin.com/in/widaa-altaher-widaa-193764422?utm_source=share_via&utm_content=profile&utm_medium=member_android',
     },
     footer: {
       copy: '© 2024 Widaa — All rights reserved',

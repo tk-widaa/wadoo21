@@ -1,97 +1,128 @@
-/* Services.css */
+/* Services.css — Modern Cyber-Luxury Services Section */
 
 .services {
   position: relative;
+  overflow: hidden;
+  padding: 120px 0;
+}
+
+.services__glow {
+  position: absolute;
+  width: 550px;
+  height: 550px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.16) 0%, transparent 70%);
+  bottom: 10%;
+  left: -150px;
+  filter: blur(120px);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .services__grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  gap: 28px;
+  position: relative;
+  z-index: 1;
 }
 
+/* Individual Service Card */
 .service-card {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  position: relative;
-  overflow: hidden;
-  animation: fadeInUp 0.6s ease both;
-  animation-delay: var(--delay, 0s);
+  cursor: pointer;
+  padding: 32px;
 }
 
-.service-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at top left, rgba(124, 58, 237, 0.05) 0%, transparent 60%);
-  pointer-events: none;
-  transition: opacity var(--transition-base);
-  opacity: 0;
+.service-card__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
-.service-card:hover::before {
-  opacity: 1;
-}
-
-.service-card__icon {
-  font-size: 2.2rem;
-  line-height: 1;
+.service-card__icon-box {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.18), rgba(6, 182, 212, 0.18));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--accent-cyan-light);
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 56px;
-  height: 56px;
-  background: rgba(124, 58, 237, 0.1);
-  border: 1px solid var(--border-subtle);
-  border-radius: var(--radius-md);
   transition: all var(--transition-base);
 }
 
-.service-card:hover .service-card__icon {
-  background: rgba(124, 58, 237, 0.18);
-  border-color: var(--border-medium);
-  transform: scale(1.05);
+.service-card:hover .service-card__icon-box {
+  background: var(--accent-gradient);
+  color: #fff;
+  transform: scale(1.08);
+  box-shadow: 0 0 25px var(--accent-glow);
+}
+
+.service-card__arrow {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-base);
+}
+
+.service-card:hover .service-card__arrow {
+  color: var(--accent-cyan-light);
+  border-color: var(--accent-cyan);
+  transform: translate(3px, -3px);
+}
+
+[dir="rtl"] .service-card:hover .service-card__arrow {
+  transform: translate(-3px, -3px) rotate(-90deg);
 }
 
 .service-card__title {
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-size: 1.3rem;
+  font-weight: 800;
   color: var(--text-primary);
   line-height: 1.3;
 }
 
 .service-card__desc {
-  font-size: 0.92rem;
+  font-size: 0.98rem;
   color: var(--text-secondary);
   line-height: 1.8;
   flex: 1;
 }
 
+/* Features List */
 .service-card__features {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding-top: 8px;
+  gap: 10px;
+  padding-top: 14px;
   border-top: 1px solid var(--border-subtle);
 }
 
 .service-card__feature {
   display: flex;
   align-items: center;
-  gap: 9px;
-  font-size: 0.85rem;
+  gap: 10px;
+  font-size: 0.88rem;
   color: var(--text-secondary);
 }
 
 .service-card__check {
-  color: var(--accent-light);
-  font-size: 0.65rem;
+  color: var(--accent-cyan);
   flex-shrink: 0;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 860px) {
   .services__grid {
     grid-template-columns: 1fr;
   }
